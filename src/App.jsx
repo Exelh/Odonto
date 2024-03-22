@@ -10,7 +10,7 @@ import Favs from './Routes/Favs'
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Navbar/>
       <Routes>
         <Route path={routes.home} element={<Home/>}/>
         <Route path={routes.contact} element={<Contact/>}/>
@@ -18,7 +18,7 @@ function App() {
         <Route path={routes.favs} element={<Favs/>}/>
         <Route path="*" element={<h1>Página no encontrada. ERROR 404</h1>} />
       </Routes>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
