@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
+
 const Form = () => {
+
+
   const [contacto, setContacto] = useState({
     nombre: "",
     correo: "",
@@ -11,12 +14,16 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (contacto.nombre.length >= 5) {
+    if (contacto.nombre.length >= 5 && validateEmail(contacto.correo)) {
       setMostrar(true);
       setError(false);
     } else {
       setError(true);
     }
+  };
+  const validateEmail = (email) => {
+    const emailRegex =  /^[^\s@]+@[^\s@]+.[^\s@]+.com$/;
+    return emailRegex.test(email);
   };
 
   return (
@@ -32,8 +39,7 @@ const Form = () => {
           />
           <label>Correo Electronico:</label>
           <input
-            role="email"
-            type="email"
+            type="text"
             onChange={(event) =>
               setContacto({ ...contacto, correo: event.target.value })
       
