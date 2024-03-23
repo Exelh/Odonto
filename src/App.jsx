@@ -11,10 +11,11 @@ import { useLightdark } from "./Context/Context";
 
 
 function App() {
-  const {theme} = useLightdark()
+  // const {theme} = useLightdark()
 
   return (
-    <div style={{background: theme.background, color:theme.font}}>
+    // <div style={{background: theme.background, color:theme.font}}>
+     <div>
       <Navbar/>
       <Routes>
         <Route path={routes.home} element={<Home/>}/>
