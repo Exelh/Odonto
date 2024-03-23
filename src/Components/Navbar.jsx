@@ -4,17 +4,14 @@ import { routes } from "./utils/routes";
 import { useLightdark } from "../Context/Context";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
+
 const Navbar = () => {
-  const {state, setState} = useLightdark()
 
-  console.log(state)
-  const Change = () => {
-    setState (!state)
-  }
-
+  const {theme, handleChangeTheme} = useLightdark()
   return (
     <nav>
       <>
+
         <Link to={routes.home}><h3>Home</h3></Link>
         <Link to={routes.contact}><h3>Contact</h3></Link>
         <Link to={routes.favs}><h3>Favs</h3></Link>
@@ -22,8 +19,11 @@ const Navbar = () => {
       </>
 
       {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      <button onClick = {Change} >Change theme</button>
-    </nav>
+      <button
+        onClick={handleChangeTheme}
+        style={{ background: theme.background, color: theme.font }}>
+        Change Theme
+      </button>    </nav>
   );
 };
 

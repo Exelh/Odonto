@@ -6,10 +6,15 @@ import Home from './Routes/Home'
 import Contact from './Routes/Contact'
 import Detail from './Routes/Detail'
 import Favs from './Routes/Favs'
+import { useLightdark } from "./Context/Context";
+
+
 
 function App() {
+  const {theme} = useLightdark()
+
   return (
-    <div className="App">
+    <div style={{background: theme.background, color:theme.font}}>
       <Navbar/>
       <Routes>
         <Route path={routes.home} element={<Home/>}/>

@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 export const themes = {
-
     light: {
         font: 'black',
         background: 'white'
@@ -12,17 +11,23 @@ export const themes = {
     }
 };
 
+
+
 export const Lightdark = createContext()
 
 const Context = ({children}) => {
-    const [state, setState] = useState(false)
+    const [theme, setTheme] = useState(themes.light);
+    const handleChangeTheme = () => {
+      if (theme === themes.dark) setTheme(themes.light);
+      if (theme === themes.light) setTheme(themes.dark);
+    };
+
     return (
-        <Lightdark.Provider value={{state, setState}}>
+        <Lightdark.Provider value={{theme, handleChangeTheme}}>
             {children}
         </Lightdark.Provider>
     )
 }
 
 export default Context
-
 export const useLightdark = () => useContext(Lightdark)
