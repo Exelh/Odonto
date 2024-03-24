@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 import { reducer } from "../../reducers/Reducer";
 import axios from 'axios'
 
@@ -25,13 +25,8 @@ export const ContextGlobal = createContext();
 const ContextProvider = ({ children }) => {
   //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
   const [state, dispatch] = useReducer(reducer, initialState); 
+  const [theme, setTheme] = useState(initialState.themes.light);
   const url = `https://jsonplaceholder.typicode.com/users` 
-  console.log(state)
-  // const [theme, setTheme] = useState(themes.light);
-  // const handleChangeTheme = () => {
-  //   if (theme === themes.dark) setTheme(themes.light);
-  //   if (theme === themes.light) setTheme(themes.dark);
-  // };
 
   useEffect(() => {
     //Mando al LS
@@ -41,13 +36,12 @@ const ContextProvider = ({ children }) => {
 useEffect(() => {
   //Llamado a la API 
   axios(url)
-  .then(res => dispatch({type: 'GET_LIST', payload: res.data})) //res.data.recipes
+  .then(res => dispatch({type: 'GET_LIST', payload: res.data}))
 }, [])
 
 
   return (
-    // <ContextGlobal.Provider value={{theme, handleChangeTheme}}>
-    <ContextGlobal.Provider value={{state, dispatch}}>
+    <ContextGlobal.Provider value={{state, dispatch, theme, setTheme}}>
       {children}
     </ContextGlobal.Provider>
   );

@@ -11,6 +11,7 @@ const Detail = () => {
   const {doctorSelected} = state
 
   const navigate = useNavigate()
+  
   const params = useParams()
   const url = `https://jsonplaceholder.typicode.com/users/${params.id}`  
 
@@ -27,8 +28,7 @@ const Detail = () => {
       <h5>{doctorSelected.phone}</h5>
       <h5>{doctorSelected.website}</h5>
       <button onClick={() => navigate(-1)}>🔙</button>
-      <button onClick={() => dispatch({type: 'ADD_FAV', payload: doctorSelected})}>⭐</button>
-
+      {/* <button onClick={() => dispatch({type: 'ADD_FAV', payload: doctorSelected})}>⭐</button> */}
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
     </>

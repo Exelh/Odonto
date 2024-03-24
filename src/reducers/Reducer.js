@@ -6,8 +6,6 @@ export const reducer = (state, action) => {
             return {...state, doctorSelected: action.payload}
         case 'ADD_FAV':
             return {...state, favs: [...state.favs, action.payload]}
-        // case 'DELETE_FAV':
-        //     // Realizar una operación utilizando .filter()
             return {}
     }
 }

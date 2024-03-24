@@ -6,16 +6,16 @@ import Home from './Routes/Home'
 import Contact from './Routes/Contact'
 import Detail from './Routes/Detail'
 import Favs from './Routes/Favs'
-import { useLightdark } from "./Context/Context";
+import { useContextGlobal } from "./Components/utils/global.context";
 
 
 
 function App() {
   // const {theme} = useLightdark()
+  const {theme} = useContextGlobal()
 
   return (
-    // <div style={{background: theme.background, color:theme.font}}>
-     <div>
+     <div style={{ background: theme.background, color: theme.font }}>
       <Navbar/>
       <Routes>
         <Route path={routes.home} element={<Home/>}/>
