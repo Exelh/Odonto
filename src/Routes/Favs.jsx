@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../Components/Card";
 import { useContextGlobal } from "../Components/utils/global.context";
-import { useNavigate } from "react-router-dom";
+import Button from "../Components/Button";
 
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Favs = () => {
-  const {state} = useContextGlobal();
-  const navigate = useNavigate()
+  const { state, dispatch } = useContextGlobal();
+  console.log(state.favs.length);
+ const [isFav, setIsFav] = useState(true);
+  const handleRemoveAll = () => {
+    dispatch({ type: 'REMOVE_ALL_FAVS' });
+    localStorage.removeItem('favs');
+    alert("Se eliminaron todos los favoritos ❌")
+};
 
-console.log(state);
+const handleRemoveSingle = (id) => {
+    const dentistToRemove = state.favs.find(dentist => dentist.id === id);
+    dispatch({ type: 'REMOVE_SINGLE_FAV', payload: id });
+    const updatedFavs = state.favs.filter(dentist => dentist.id !== id);
+    localStorage.setItem('favs', JSON.stringify(updatedFavs));
+    alert(`Se eliminó ${dentistToRemove.name} de favoritos ❌`);
+};
+
   return (
     <>
-      <h1>Dentists Favs</h1>
+      <h1>Destacados</h1>
       <div className="card-grid">
-        {/* este componente debe consumir los destacados del localStorage */}
-        {/* Deberan renderizar una Card por cada uno de ellos */}
-        {state.favs.map(item => <Card key={item.id} item={item}/>)}
+        {state.favs.map((item) => (
+          <Card 
+          key={item.id} 
+          item={item} 
+          isFav={isFav} 
+          handleRemoveSingle={handleRemoveSingle}/>
+        ))}
       </div>
-      <button onClick={() => navigate(-1)}>🔙</button>
-
+      {state.favs !=0 ?("") : (<p className="p-destacados">Ud. no tiene favoritos agregados aún!</p>)}
+      {state.favs.length >=2 ?(
+            <button onClick={handleRemoveAll} className="button-delAll">BORRAR TODOS</button>) : ("")}
+      <Button/>
     </>
   );
 };
 
 export default Favs;
+
+

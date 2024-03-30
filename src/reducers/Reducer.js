@@ -6,6 +6,11 @@ export const reducer = (state, action) => {
             return {...state, doctorSelected: action.payload}
         case 'ADD_FAV':
             return {...state, favs: [...state.favs, action.payload]}
-            return {}
+        case 'REMOVE_ALL_FAVS':
+            return {...state, favs: []}
+        case 'REMOVE_SINGLE_FAV':
+            return {...state, favs: state.favs.filter(dentist => dentist.id !== action.payload)}
+        default:
+            return state;
     }
 }
