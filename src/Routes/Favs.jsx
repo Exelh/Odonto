@@ -6,12 +6,12 @@ import Button from "../Components/Button";
 
 const Favs = () => {
   const { state, dispatch } = useContextGlobal();
-  console.log(state.favs.length);
+  
  const [isFav, setIsFav] = useState(true);
   const handleRemoveAll = () => {
     dispatch({ type: 'REMOVE_ALL_FAVS' });
     localStorage.removeItem('favs');
-    alert("Se eliminaron todos los favoritos ❌")
+    confirm("Se eliminaron todos los favoritos ❌")
 };
 
 const handleRemoveSingle = (id) => {
@@ -19,7 +19,7 @@ const handleRemoveSingle = (id) => {
     dispatch({ type: 'REMOVE_SINGLE_FAV', payload: id });
     const updatedFavs = state.favs.filter(dentist => dentist.id !== id);
     localStorage.setItem('favs', JSON.stringify(updatedFavs));
-    alert(`Se eliminó ${dentistToRemove.name} de favoritos ❌`);
+    confirm(`Se eliminó ${dentistToRemove.name} de favoritos ❌`);
 };
 
   return (
