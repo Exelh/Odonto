@@ -16,7 +16,7 @@ const Card = ({ item, isFav, handleRemoveSingle }) => {
   };
   return (
     <div className="card">
-      <img className="imgDoctor" src="../../public/images/doctor.jpg" alt="" />
+      <img className="imgDoctor" src="../../public/doctor.jpg" alt="" />
       <Link to={"/dentista/" + item.id}>
           <h4>{item.name}</h4>
       </Link>
